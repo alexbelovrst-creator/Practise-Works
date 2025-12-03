@@ -1,0 +1,20 @@
+S = input("Введите строку с пробелами: ")
+
+first_space_index = S.find(' ')
+
+if first_space_index != -1:
+    second_space_index = S.find(' ', first_space_index + 1)
+else:
+    second_space_index = -1
+
+
+if first_space_index != -1 and second_space_index != -1:
+
+    result_substring = S[first_space_index + 1 : second_space_index]
+
+    print("\nПодстрока между первым и вторым пробелом:")
+    print(result_substring)
+
+else:
+    print("\nНайдено меньше двух пробелов. Выводится пустая строка.")
+    print("") # Вывод пустой строки

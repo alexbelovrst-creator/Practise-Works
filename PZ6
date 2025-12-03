@@ -1,0 +1,31 @@
+A = [5, -2, 10, -7, 0, 4, -1]
+
+print("Исходный список A:")
+print(A)
+
+
+first_positive = None
+found = False
+
+for x in A:
+    if x > 0:
+        first_positive = x
+        found = True
+        break
+
+
+if found:
+    print(f"\nПервое положительное число: {first_positive}")
+
+
+    for i in range(len(A)):
+
+        if A[i] < 0:
+            A[i] = first_positive
+
+    print("\nСписок после замены:")
+    print(A)
+
+else:
+    print("\nПоложительные числа в списке отсутствуют. Список не изменен.")
+    print(A)

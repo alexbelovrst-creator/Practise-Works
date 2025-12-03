@@ -1,0 +1,16 @@
+X = 5
+A = 350
+
+
+price_per_kg = A / X
+
+
+Y = 3
+
+cost_of_Y_kg = price_per_kg * Y
+
+print(f"Дано: {X} кг конфет стоят {A} рублей.")
+
+print(f"Стоимость 1 кг конфет: {price_per_kg} рублей")
+
+print(f"Стоимость {Y} кг конфет: {cost_of_Y_kg} рублей")

@@ -1,0 +1,35 @@
+a = input("Введите длину прямоугольника A: ")
+b = input("Введите ширину прямоугольника B: ")
+c = input("Введите сторону квадрата C: ")
+
+A = int(a)
+B = int(b)
+C = int(c)
+
+
+temp_a = A
+count_a = 0
+
+while temp_a >= C:
+    temp_a = temp_a - C
+    count_a = count_a + 1
+
+
+temp_b = B
+count_b = 0
+
+while temp_b >= C:
+    temp_b = temp_b - C
+    count_b = count_b + 1
+
+
+total_squares = 0
+i = 0
+
+while i < count_b:
+    total_squares = total_squares + count_a
+    i = i + 1
+
+
+print('\nОбщее количество квадратов:')
+print(total_squares)

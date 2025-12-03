@@ -1,0 +1,34 @@
+def SortInc3(A, B, C):
+
+
+    nums = [A, B, C]
+
+    nums.sort()
+
+    return nums[0], nums[1], nums[2]
+
+
+print("--- Ввод первого набора чисел (A1, B1, C1) ---")
+
+A1 = float(input("Введите A1: "))
+B1 = float(input("Введите B1: "))
+C1 = float(input("Введите C1: "))
+
+
+print("\n--- Ввод второго набора чисел (A2, B2, C2) ---")
+
+A2 = float(input("Введите A2: "))
+B2 = float(input("Введите B2: "))
+C2 = float(input("Введите C2: "))
+
+A1_sorted, B1_sorted, C1_sorted = SortInc3(A1, B1, C1)
+
+A2_sorted, B2_sorted, C2_sorted = SortInc3(A2, B2, C2)
+
+
+print("\n--- Результат упорядочивания ---")
+print("Исходный набор (A1, B1, C1):", A1, B1, C1)
+print("Упорядоченный набор:", A1_sorted, B1_sorted, C1_sorted)
+print('---')
+print("Исходный набор (A2, B2, C2):", A2, B2, C2)
+print("Упорядоченный набор:", A2_sorted, B2_sorted, C2_sorted)

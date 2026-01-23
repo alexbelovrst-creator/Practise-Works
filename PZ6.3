@@ -1,0 +1,16 @@
+Дан список размера N. Обнулить элементы списка, расположенные между его 
+минимальным и максимальным элементами (не включая минимальный и 
+максимальный элементы).
+
+c = [random.randint(50, 100)] + sorted([random.randint(1, 49) for _ in range(n-1)])
+print(f"Список с неупорядоченным первым элементом: {c}")
+first = c.pop(0)
+inserted = False
+for i in range(len(c)):
+    if first < c[i]:
+        c.insert(i, first)
+        inserted = True
+        break
+if not inserted:
+    c.append(first)
+print(f"Упорядоченный список: {c}")

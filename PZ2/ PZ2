@@ -1,14 +1,25 @@
 Известно, что X кг шоколадных конфет стоит A рублей, а Y кг ирисок 
 стоит B рублей. Определить, сколько стоит 1 кг шоколадных конфет, 1 кг ирисок, а также 
 во сколько раз шоколадные конфеты дороже ирисок
+
 try:
-    k = int(input("Введите день года K (1-365): "))
-    if 1 <= k <= 365:        
-       day_of_week = (k - 1 + 1) % 7
-        if day_of_week == 0:
-            day_of_week = 7
-        print(f"Номер дня недели для {k}-го дня: {day_of_week}")
-    else:
-        print("Число должно быть в диапазоне 1-365")
+    x_kg_choco = float(input("Введите вес шоколадных конфет (кг): "))
+    a_rub_choco = float(input("Введите стоимость шоколадных конфет (руб): "))
+    
+    y_kg_iris = float(input("Введите вес ирисок (кг): "))
+    b_rub_iris = float(input("Введите стоимость ирисок (руб): "))
+
+    price_1kg_choco = a_rub_choco / x_kg_choco
+    price_1kg_iris = b_rub_iris / y_kg_iris
+
+    ratio = price_1kg_choco / price_1kg_iris
+
+    print("-" * 30)
+    print(f"Цена 1 кг шоколадных конфет: {price_1kg_choco:.2f} руб.")
+    print(f"Цена 1 кг ирисок: {price_1kg_iris:.2f} руб.")
+    print(f"Шоколадные конфеты дороже ирисок в {ratio:.2f} раз(а).")
+
 except ValueError:
-    print("Ошибка: введите целое число")
+    print("Ошибка: нужно вводить только числа!")
+except ZeroDivisionError:
+    print("Ошибка: вес не может быть равен нулю!")

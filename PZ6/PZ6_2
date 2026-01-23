@@ -1,9 +1,35 @@
 Дан список размера N. Найти номера тех элементов список, которые больше своего 
 левого соседа, и количество таких элементов. Найденные номера выводить в 
 порядке их убывания.
-b = []
-for k in range(1, n + 1):
-    avg = sum(a[:k]) / k
-    b.append(round(avg, 2))
-print(f"Список средних арифметических B: {b}")
 
+import random
+
+n = input("Введите размер списка N: ")
+while type(n) != int:
+    try:
+        n = int(n)
+        if n <= 1:
+            print("Размер должен быть больше 1!")
+            n = "error"
+    except ValueError:
+        print("Нужно ввести целое число!")
+        n = input("Введите размер списка N: ")
+
+a = []
+for _ in range(n):
+    a.append(random.randint(1, 100))
+
+print("Исходный список:", a)
+
+indices = []
+i = 1 
+
+while i < n:
+    if a[i] > a[i-1]:
+        indices.append(i) # Сохраняем индекс (номер)
+    i += 1
+
+indices.sort(reverse=True)
+
+print(f"Номера элементов, больших левого соседа (в порядке убывания): {indices}")
+print(f"Количество таких элементов: {len(indices)}")

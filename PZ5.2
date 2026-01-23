@@ -1,0 +1,32 @@
+Описать функцию Mean(параметры), вычисляющую среднее арифметическое 
+AMean = (X+Y)/2 и среднее геометрическое GMean = y/X Y двух положительных 
+чисел X и Y. С помощью этой функции найти среднее арифметическое и среднее 
+геометрическое для пар (A,B), (A,C), (A,D), если даны A,B,C,D.
+import math
+
+def IsSquare(K):
+    if K <= 0:
+        return False
+    root = math.isqrt(K)
+    return root * root == K
+
+def solve_task():
+    print("Программа для поиска полных квадратов в наборе из 10 чисел.")
+    count = 0
+    numbers_processed = 0
+    
+    while numbers_processed < 10:
+        try:
+            val = int(input(f"Введите число {numbers_processed + 1}: "))
+            if IsSquare(val):
+                count += 1
+            numbers_processed += 1
+        except ValueError:
+            print("Ошибка ввода! Пожалуйста, введите целое число.")
+
+    print("-" * 30)
+    print(f"Количество полных квадратов в наборе: {count}")
+
+if __name__ == "__main__":
+    solve_task()
+    

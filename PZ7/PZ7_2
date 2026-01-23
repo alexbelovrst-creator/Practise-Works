@@ -16,7 +16,7 @@ for i in range(len(s)):
         balance -= 1
         
     if balance < 0:
-        error_pos = i + 1 # Номер позиции (с 1)
+        error_pos = i + 1 
         break
 
 print("-" * 30)

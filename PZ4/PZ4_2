@@ -1,15 +1,29 @@
 Дано целое число N (>0). С помощью операций деления нацело и взятия остатка от 
 деления определить, имеются ли в записи числа N нечетные цифры. Если имеются, 
 то вывести TRUE, если нет — вывести FALSE.
-try:
-    n = int(input("Введите целое положительное число N: "))
-    found = False
-    temp_n = abs(n)
-    while temp_n > 0:
-        if temp_n % 10 == 2:
-            found = True
-            break
-        temp_n //= 10
-    print(f"Наличие цифры '2': {found}")
-except ValueError:
-    print("Ошибка ввода")
+
+n = input("Введите целое положительное число N: ")
+while type(n) != int:
+    try:
+        n = int(n)
+        if n <= 0:
+            print("Число должно быть больше 0!")
+            n = "ошибка" # Чтобы цикл продолжился
+    except ValueError:
+        print("Неправильно ввели!")
+        n = input("Введите целое положительное число N: ")
+
+found_odd = False
+temp_n = n
+
+while temp_n > 0:
+    digit = temp_n % 10  
+    if digit % 2 != 0:   
+        found_odd = True
+        break            
+    temp_n //= 10        
+
+if found_odd:
+    print("TRUE")
+else:
+    print("FALSE")

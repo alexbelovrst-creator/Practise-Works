@@ -15,11 +15,10 @@ def check_brackets(s):
                 return index 
             else:
                 stack.pop()
-
-    if not stack:
-        return 0  # Всё правильно
+  if not stack:
+        return 0  
     else:
-        return -1 # Остались лишние открытые скобки
+        return -1 
 
 string_to_test = input("Введите строку со скобками: ")
 

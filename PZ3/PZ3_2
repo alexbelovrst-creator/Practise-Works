@@ -5,7 +5,7 @@
 процентной ставки в зависимости от вносимой суммы.
 print("Расчет процентной ставки по вкладу")
 
-while type(summa) != float:  # обработка исключений
+while type(summa) != float: 
     try:
         summa = float(summa)
     except ValueError:

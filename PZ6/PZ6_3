@@ -2,15 +2,36 @@
 минимальным и максимальным элементами (не включая минимальный и 
 максимальный элементы).
 
-c = [random.randint(50, 100)] + sorted([random.randint(1, 49) for _ in range(n-1)])
-print(f"Список с неупорядоченным первым элементом: {c}")
-first = c.pop(0)
-inserted = False
-for i in range(len(c)):
-    if first < c[i]:
-        c.insert(i, first)
-        inserted = True
-        break
-if not inserted:
-    c.append(first)
-print(f"Упорядоченный список: {c}")
+import random
+
+n = input("Введите размер списка N: ")
+while type(n) != int:
+    try:
+        n = int(n)
+        if n < 3:
+            print("Для решения нужно минимум 3 элемента!")
+            n = "error"
+    except ValueError:
+        print("Ошибка! Введите целое число.")
+        n = input("Введите размер списка N: ")
+
+a = []
+for _ in range(n):
+    a.append(random.randint(1, 50))
+
+print("Исходный список:", a)
+
+idx_min = a.index(min(a))
+idx_max = a.index(max(a))
+
+start_idx = min(idx_min, idx_max)
+end_idx = max(idx_min, idx_max)
+
+k = start_idx + 1
+while k < end_idx:
+    a[k] = 0
+    k += 1
+
+print(f"Индекс min: {idx_min}, индекс max: {idx_max}")
+print("Результирующий список:")
+print(a)

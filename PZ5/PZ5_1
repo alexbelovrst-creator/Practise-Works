@@ -1,19 +1,11 @@
 Составить функцию, которая напечатает сорок любых символов.
-import math
 
-def IsSquare(K):
-  if K <= 0:
-        return False
-    root = math.isqrt(K)
-    return root * root == K
+def print_symbols():
+    # Используем символ '*' (можно любой другой) и умножаем на 40
+    print("*" * 40)
 
-if __name__ == "__main__":
-    try:
-        num = int(input("Введите целое число для проверки: "))
-        if IsSquare(num):
-            print(f"Число {num} является полным квадратом.")
-        else:
-            print(f"Число {num} НЕ является полным квадратом.")
-    except ValueError:
-        print("Ошибка: введите целое число.")
+print("Программа выводит 40 символов:")
+print_symbols()
+
+
 

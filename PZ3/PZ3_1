@@ -1,8 +1,16 @@
 Дано целое число A. Проверить истинность высказывания: «Число A является 
 нечетным».
-try:
-    number = int(input("Введите целое число: "))
-    is_odd_three_digit = 100 <= abs(number) <= 999 and number % 2 != 0
-    print(f"Число является нечетным трехзначным: {is_odd_three_digit}")
-except ValueError:
-    print("Ошибка ввода")
+
+a = input("Введите целое число A: ")
+
+while type(a) != int:  
+    try:
+        a = int(a)
+    except ValueError:
+        print("Вы ввели не целое число!")
+        a = input("Введите целое число A: ")
+
+if a % 2 != 0:
+    print(f"Число {a} является нечетным: Истина")
+else:
+    print(f"Число {a} является нечетным: Ложь")

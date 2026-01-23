@@ -1,0 +1,20 @@
+Составить функцию, которая напечатает сорок любых символов.
+import math
+
+def IsSquare(K):
+  if K <= 0:
+        return False
+    root = math.isqrt(K)
+    # Проверяем, дает ли квадрат корня исходное число
+    return root * root == K
+
+if __name__ == "__main__":
+    try:
+        num = int(input("Введите целое число для проверки: "))
+        if IsSquare(num):
+            print(f"Число {num} является полным квадратом.")
+        else:
+            print(f"Число {num} НЕ является полным квадратом.")
+    except ValueError:
+        print("Ошибка: введите целое число.")
+

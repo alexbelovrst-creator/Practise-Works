@@ -4,23 +4,27 @@
 в которой расположена первая ошибочная закрывающая скобка, или, если 
 закрывающих скобок не хватает, число —1.
 
-def check_brackets(s):
-    stack = [] 
+s = input("Введите строку для проверки скобок: ")
 
-    for index, char in enumerate(s):
-        if char == '(':
-            stack.append(index)
-        elif char == ')':
-            if not stack:
-                return index 
-            else:
-                stack.pop()
-  if not stack:
-        return 0  
-    else:
-        return -1 
+balance = 0
+error_pos = 0
 
-string_to_test = input("Введите строку со скобками: ")
+for i in range(len(s)):
+    if s[i] == '(':
+        balance += 1
+    elif s[i] == ')':
+        balance -= 1
+        
+    if balance < 0:
+        error_pos = i + 1 # Номер позиции (с 1)
+        break
 
-result = check_brackets(string_to_test)
-print(f"Результат: {result}")
+print("-" * 30)
+print(f"Исходная строка: {s}")
+
+if error_pos != 0:
+    print(f"Результат: {error_pos}")
+elif balance > 0:
+    print("Результат: -1")
+else:
+    print("Результат: 0")

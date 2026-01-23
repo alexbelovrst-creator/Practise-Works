@@ -1,0 +1,17 @@
+Даны два целых числа A и B (A < B). Вывести в порядке убывания все целые числа, 
+расположенные между A и B (не включая числа A и B), а также количество N этих 
+чисел.
+try:
+    n = int(input("Введите количество слагаемых N: "))
+    if n > 0:
+        result = 0
+        current_value = 1.1
+        for i in range(n):
+            if i % 2 == 0:
+                result += current_value
+            else:
+                result -= current_value
+            current_value += 0.1
+        print(f"Результат выражения: {round(result, 2)}")
+except ValueError:
+    print("Ошибка ввода")

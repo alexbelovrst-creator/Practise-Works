@@ -1,13 +1,12 @@
+# Составить список, в который будут включены только согласные буквы
+# и привести их к верхнему регистру.
+# Список: ['Оттава', 'Москва', 'Пекин', 'Полоцк', 'Версаль', 'Дели', 'Каир']
+
 cities = ['Оттава', 'Москва', 'Пекин', 'Полоцк', 'Версаль', 'Дели', 'Каир']
-vowels = 'аеёиоуыэюяАЕЁИОУЫЭЮЯ'
 
-consonants = [
-    ch.upper()
-    for word in cities
-    for ch in word
-    if ch.isalpha() and ch not in vowels
-]
+glasnie = 'аеёиоуыэюя'
 
-print("Список городов:", cities)
-print("Согласные в верхнем регистре:", consonants)
+result = [bukva.upper() for slovo in cities for bukva in slovo.lower() if bukva.isalpha() and bukva not in glasnie]
 
+print("Исходный список:", cities)
+print("Согласные буквы в верхнем регистре:", result)

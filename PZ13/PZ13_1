@@ -1,0 +1,37 @@
+import re
+
+writer_text = """Лев Толстой (1828-1910) написал роман Война и мир, роман Анна Каренина.
+Фёдор Достоевский (1821-1881) написал роман Преступление и наказание, роман Идиот.
+Антон Чехов (1860-1904) написал произведение Степь, произведение Вишнёвый сад.
+Александр Пушкин (1799-1837) написал роман Евгений Онегин, поэму Руслан и Людмила.
+Иван Тургенев (1818-1883) написал роман Отцы и дети, роман Рудин."""
+
+with open('writer.txt', 'w', encoding='utf-8') as f:
+    f.write(writer_text)
+
+with open('writer.txt', encoding='utf-8') as f:
+    text = f.read()
+
+print("Содержимое файла:")
+print(text)
+
+surnames = re.findall(r'[А-ЯЁ][а-яё]+\s[А-ЯЁ][а-яё]+', text)
+print("\nИмена писателей:")
+for s in surnames:
+    print(" ", s)
+print("Количество:", len(surnames))
+
+works = re.findall(r'(?:роман|поэму|произведение)\s([А-ЯЁ][^\n,.]+)', text)
+print("\nПроизведения:")
+for w in works:
+    print(" ", w)
+print("Количество:", len(works))
+
+new_text = re.sub(r'роман', 'произведение', text)
+with open('writer_new.txt', 'w', encoding='utf-8') as f:
+    f.write(new_text)
+
+print("\nНовый файл writer_new.txt:")
+with open('writer_new.txt', encoding='utf-8') as f:
+    print(f.read())
+

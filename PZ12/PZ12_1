@@ -1,0 +1,37 @@
+matr = [
+    [3, -7, 12, -4, 8],
+    [-1, 15, -9, 6, -2],
+    [4, 11, -3, 7, 0],
+    [-5, 2, 18, -6, 10],
+    [1, -8, 5, 13, -11]
+]
+
+print("Исходная матрица:")
+for row in matr:
+    print(row)
+
+min_val = matr[0][0]
+max_val = matr[0][0]
+for row in matr:
+    for el in row:
+        if el < min_val:
+            min_val = el
+        if el > max_val:
+            max_val = el
+
+print("Минимальный элемент:", min_val)
+print("Максимальный элемент:", max_val)
+
+total_elements = sum(len(row) for row in matr)
+first_third_count = total_elements // 3
+count = 0
+neg_sum = 0
+for row in matr:
+    for el in row:
+        if count < first_third_count:
+            if el < 0:
+                neg_sum += el
+        count += 1
+
+print("Сумма отрицательных элементов в первой трети:", neg_sum)
+

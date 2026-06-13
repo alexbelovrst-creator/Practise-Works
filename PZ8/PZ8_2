@@ -1,0 +1,23 @@
+data = 'Петров Иван ПОКС-29 5 4 3 2 5 4 4 5 4'
+parts = data.split()
+
+student = {}
+student['Фамилия'] = parts[0]
+student['Имя'] = parts[1]
+student['Группа'] = parts[2]
+student['Оценки'] = []
+
+for item in parts[3:]:
+    student['Оценки'].append(int(item))
+
+total = 0
+for grade in student['Оценки']:
+    total += grade
+
+average = total / len(student['Оценки'])
+
+for key, value in student.items():
+    print(f"{key}: {value}")
+
+print(f"Среднее арифметическое оценок: {round(average, 2)}")
+

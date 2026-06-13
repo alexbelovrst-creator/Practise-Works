@@ -1,0 +1,15 @@
+voyage = {'Мексика', 'Канада', 'Израиль', 'Италия'}
+reyna_tur = {'Англия', 'Япония', 'Канада', 'ЮАР'}
+
+print("Вояж:", voyage)
+print("РейнаТур:", reyna_tur)
+
+print("Туры из Вояж, которых нет в РейнаТур:", voyage - reyna_tur)
+print("Туры из РейнаТур, которых нет в Вояж:", reyna_tur - voyage)
+print("Одинаковые туры:", voyage & reyna_tur)
+
+if voyage == reyna_tur:
+    print("Перечни туров равны")
+else:
+    print("Перечни туров не равны")
+

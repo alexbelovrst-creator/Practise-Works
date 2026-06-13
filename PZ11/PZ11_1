@@ -1,0 +1,15 @@
+n = 10
+A = [3, -7, 12, -4, 8, -1, 15, -9, 6, -2]
+print("Последовательность A:", A)
+
+half = n // 2
+B = A[:half]
+C = A[half:]
+print("B (первая половина):", B)
+print("C (вторая половина):", C)
+
+products = [B[i] * C[i] for i in range(half)]
+print("Произведения B[i]*C[i]:", products)
+
+average = sum(products) / len(products)
+print("Среднее арифметическое:", round(average, 2))

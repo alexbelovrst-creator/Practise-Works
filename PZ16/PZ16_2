@@ -1,36 +1,27 @@
+# Создайте класс "Человек", который содержит информацию о имени, возрасте и поле.
+# Создайте классы "Мужчина" и "Женщина", которые наследуются от класса "Человек".
+# Каждый класс должен иметь метод, который выводит информацию о поле объекта.
+
 class Person:
     def __init__(self, name, age, gender):
         self.name = name
         self.age = age
         self.gender = gender
 
-    def info(self):
-        print(f"Имя: {self.name}, Возраст: {self.age}, Пол: {self.gender}")
 
-
-class Male(Person):
-    def __init__(self, name, age):
-        super().__init__(name, age, "мужской")
-
+class Man(Person):
     def show_gender(self):
-        print(f"{self.name} — мужчина")
+        print(self.name + " - мужчина, возраст " + str(self.age))
 
 
-class Female(Person):
-    def __init__(self, name, age):
-        super().__init__(name, age, "женский")
-
+class Woman(Person):
     def show_gender(self):
-        print(f"{self.name} — женщина")
+        print(self.name + " - женщина, возраст " + str(self.age))
 
 
-m = Male("Алексей", 20)
-f = Female("Мария", 19)
+man1 = Man("Сергей", 20, "мужской")
+woman1 = Woman("Мария", 19, "женский")
 
-m.info()
-m.show_gender()
-
-print()
-f.info()
-f.show_gender()
+man1.show_gender()
+woman1.show_gender()
 

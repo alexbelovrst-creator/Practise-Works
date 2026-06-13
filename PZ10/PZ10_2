@@ -1,0 +1,29 @@
+import string
+
+with open('text18-2.txt', 'w', encoding='UTF-8') as tmp:
+    tmp.write("Белая берёза под моим окном\n")
+    tmp.write("Принакрылась снегом, точно серебром.\n")
+    tmp.write("На пушистых ветках снежною каймой\n")
+    tmp.write("Распустились кисти белой бахромой.\n")
+
+punct_count = 0
+lines = []
+
+for line in open('text18-2.txt', encoding='UTF-8'):
+    print(line, end='')
+    lines.append(line)
+    for ch in line:
+        if ch in string.punctuation:
+            punct_count += 1
+
+print()
+print('Количество знаков препинания:', punct_count)
+
+f_out = open('text18-2_result.txt', 'w', encoding='UTF-8')
+f_out.writelines(reversed(lines))
+f_out.close()
+
+print()
+for line in open('text18-2_result.txt', encoding='UTF-8'):
+    print(line, end='')
+

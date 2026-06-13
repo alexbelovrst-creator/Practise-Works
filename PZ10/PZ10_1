@@ -1,0 +1,41 @@
+numbers = [3, -7, 12, -4, 8, -1, 15, -9, 6, -2]
+
+f1 = open('data_var2.txt', 'w')
+f1.write(' '.join(str(n) for n in numbers))
+f1.close()
+
+f1 = open('data_var2.txt', 'r')
+raw = f1.read()
+f1.close()
+
+nums = raw.split()
+for i in range(len(nums)):
+    nums[i] = int(nums[i])
+
+max_elem = nums[0]
+for n in nums:
+    if n > max_elem:
+        max_elem = n
+
+half = len(nums) // 2
+product = 1
+has_neg = False
+for i in range(half):
+    if nums[i] < 0:
+        product *= nums[i]
+        has_neg = True
+
+if not has_neg:
+    product = 0
+
+f2 = open('result_var2.txt', 'w')
+f2.write('Исходные данные: ' + str(nums) + '\n')
+f2.write('Количество элементов: ' + str(len(nums)) + '\n')
+f2.write('Максимальный элемент: ' + str(max_elem) + '\n')
+f2.write('Произведение элементов меньших 0 в первой половине: ' + str(product) + '\n')
+f2.close()
+
+f2 = open('result_var2.txt', 'r')
+print(f2.read())
+f2.close()
+

@@ -1,0 +1,36 @@
+class Person:
+    def __init__(self, name, age, gender):
+        self.name = name
+        self.age = age
+        self.gender = gender
+
+    def info(self):
+        print(f"Имя: {self.name}, Возраст: {self.age}, Пол: {self.gender}")
+
+
+class Male(Person):
+    def __init__(self, name, age):
+        super().__init__(name, age, "мужской")
+
+    def show_gender(self):
+        print(f"{self.name} — мужчина")
+
+
+class Female(Person):
+    def __init__(self, name, age):
+        super().__init__(name, age, "женский")
+
+    def show_gender(self):
+        print(f"{self.name} — женщина")
+
+
+m = Male("Алексей", 20)
+f = Female("Мария", 19)
+
+m.info()
+m.show_gender()
+
+print()
+f.info()
+f.show_gender()
+

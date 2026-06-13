@@ -1,0 +1,23 @@
+class Student:
+    def __init__(self, first_name, last_name, grades):
+        self.first_name = first_name
+        self.last_name = last_name
+        self.grades = grades
+
+    def average(self):
+        return sum(self.grades) / len(self.grades)
+
+    def is_excellent(self):
+        return all(g == 5 for g in self.grades)
+
+
+s1 = Student("Иван", "Петров", [5, 4, 5, 5, 4])
+s2 = Student("Анна", "Смирнова", [5, 5, 5, 5, 5])
+
+print(f"{s1.last_name} {s1.first_name}")
+print(f"Средний балл: {s1.average()}")
+print(f"Отличник: {s1.is_excellent()}")
+
+print(f"\n{s2.last_name} {s2.first_name}")
+print(f"Средний балл: {s2.average()}")
+print(f"Отличник: {s2.is_excellent()}")

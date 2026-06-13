@@ -1,179 +1,86 @@
-<!DOCTYPE html>
-<html lang="ru">
-<head>
-    <meta charset="UTF-8">
-    <title>HTML5 - Формы</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 20px 40px;
-            background: #fff;
-            color: #000;
-        }
+# Реализовать с применением пакета tkinter форму заявки на работу в зоопарке,
+# максимально приближенную к прототипу по ссылке из таблицы 1 (Вариант 2).
 
-        h1 {
-            font-size: 28px;
-            font-weight: bold;
-            color: #c0392b;
-            margin-bottom: 4px;
-        }
+import tkinter as tk
+from tkinter import messagebox
 
-        p.hint {
-            font-style: italic;
-            font-size: 13px;
-            margin-bottom: 16px;
-        }
+window = tk.Tk()
+window.title("HTML5 - Формы")
+window.geometry("500x650")
 
-        p.hint span {
-            color: red;
-        }
+label_title = tk.Label(window, text="Форма заявки на работу в зоопарке", font=("Arial", 16, "bold"))
+label_title.pack(pady=(15, 5))
 
-        fieldset {
-            border: 1px solid #999;
-            margin-bottom: 16px;
-            padding: 10px 16px 16px;
-        }
+label_subtitle = tk.Label(window, text="Пожалуйста, заполните форму. Обязательные поля помечены *", font=("Arial", 9, "italic"))
+label_subtitle.pack(pady=(0, 10))
 
-        legend {
-            font-variant: small-caps;
-            font-weight: bold;
-            font-size: 14px;
-            padding: 0 4px;
-        }
 
-        .field {
-            display: flex;
-            align-items: flex-start;
-            margin-top: 10px;
-        }
+contact_frame = tk.LabelFrame(window, text="Контактная информация", font=("Arial", 10, "bold"), padx=10, pady=10)
+contact_frame.pack(fill="x", padx=15, pady=5)
 
-        .field label {
-            width: 160px;
-            font-size: 14px;
-            padding-top: 3px;
-        }
+tk.Label(contact_frame, text="Имя *").grid(row=0, column=0, sticky="w", pady=5)
+entry_name = tk.Entry(contact_frame, width=40)
+entry_name.grid(row=0, column=1, pady=5, padx=10)
 
-        .field input[type="text"],
-        .field input[type="email"],
-        .field input[type="number"],
-        .field select,
-        .field textarea {
-            font-size: 13px;
-            border: 1px solid #aaa;
-            padding: 2px 4px;
-        }
+tk.Label(contact_frame, text="Телефон").grid(row=1, column=0, sticky="w", pady=5)
+entry_phone = tk.Entry(contact_frame, width=40)
+entry_phone.grid(row=1, column=1, pady=5, padx=10)
 
-        .field input[type="text"],
-        .field input[type="email"],
-        .field input[type="number"] {
-            width: 240px;
-            height: 22px;
-        }
+tk.Label(contact_frame, text="Email *").grid(row=2, column=0, sticky="w", pady=5)
+entry_email = tk.Entry(contact_frame, width=40)
+entry_email.grid(row=2, column=1, pady=5, padx=10)
 
-        .field select {
-            width: 250px;
-            height: 26px;
-        }
 
-        .field textarea {
-            width: 240px;
-            height: 90px;
-            resize: vertical;
-        }
+personal_frame = tk.LabelFrame(window, text="Персональная информация", font=("Arial", 10, "bold"), padx=10, pady=10)
+personal_frame.pack(fill="x", padx=15, pady=5)
 
-        .checkboxes {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 8px 0;
-            font-size: 14px;
-        }
+tk.Label(personal_frame, text="Возраст *").grid(row=0, column=0, sticky="w", pady=5)
+entry_age = tk.Entry(personal_frame, width=40)
+entry_age.grid(row=0, column=1, pady=5, padx=10)
 
-        .checkboxes label {
-            display: flex;
-            align-items: center;
-            gap: 5px;
-        }
+tk.Label(personal_frame, text="Пол").grid(row=1, column=0, sticky="w", pady=5)
+gender = tk.StringVar(value="Женщина")
+gender_menu = tk.OptionMenu(personal_frame, gender, "Женщина", "Мужчина")
+gender_menu.config(width=35)
+gender_menu.grid(row=1, column=1, pady=5, padx=10)
 
-        .required {
-            color: red;
-        }
+tk.Label(personal_frame, text="Перечислите личные\nкачества").grid(row=2, column=0, sticky="w", pady=5)
+text_qualities = tk.Text(personal_frame, width=40, height=4)
+text_qualities.grid(row=2, column=1, pady=5, padx=10)
 
-        button[type="submit"] {
-            margin-top: 10px;
-            padding: 6px 16px;
-            font-size: 13px;
-            cursor: pointer;
-            background: #f0f0f0;
-            border: 1px solid #aaa;
-        }
-    </style>
-</head>
-<body>
 
-<h1>Форма заявки на работу в зоопарке</h1>
-<p class="hint">Пожалуйста, заполните форму. Обязательные поля помечены <span>*</span></p>
+animals_frame = tk.LabelFrame(window, text="Выберите ваших любимых животных", font=("Arial", 10, "bold"), padx=10, pady=10)
+animals_frame.pack(fill="x", padx=15, pady=5)
 
-<form action="#" method="post">
+animals = ["Зебра", "Кошак", "Анаконда", "Человек", "Слон", "Антилопа", "Голубь", "Краб"]
+animal_vars = {}
 
-    <fieldset>
-        <legend>Контактная информация</legend>
+for i, animal in enumerate(animals):
+    var = tk.IntVar()
+    animal_vars[animal] = var
+    check = tk.Checkbutton(animals_frame, text=animal, variable=var)
+    check.grid(row=i // 4, column=i % 4, sticky="w", padx=10, pady=5)
 
-        <div class="field">
-            <label>Имя <span class="required">*</span></label>
-            <input type="text" name="name" required>
-        </div>
 
-        <div class="field">
-            <label>Телефон</label>
-            <input type="text" name="phone">
-        </div>
+def send_info():
+    if entry_name.get() == "" or entry_email.get() == "" or entry_age.get() == "":
+        messagebox.showwarning("Ошибка", "Заполните обязательные поля, отмеченные *")
+        return
 
-        <div class="field">
-            <label>Email <span class="required">*</span></label>
-            <input type="email" name="email" required>
-        </div>
-    </fieldset>
+    selected_animals = [animal for animal, var in animal_vars.items() if var.get() == 1]
 
-    <fieldset>
-        <legend>Персональная информация</legend>
+    info = "Имя: " + entry_name.get() + "\n"
+    info += "Телефон: " + entry_phone.get() + "\n"
+    info += "Email: " + entry_email.get() + "\n"
+    info += "Возраст: " + entry_age.get() + "\n"
+    info += "Пол: " + gender.get() + "\n"
+    info += "Качества: " + text_qualities.get("1.0", "end").strip() + "\n"
+    info += "Животные: " + ", ".join(selected_animals)
 
-        <div class="field">
-            <label>Возраст <span class="required">*</span></label>
-            <input type="number" name="age" min="18" max="99" required>
-        </div>
+    messagebox.showinfo("Информация отправлена", info)
 
-        <div class="field">
-            <label>Пол</label>
-            <select name="gender">
-                <option value="female">Женщина</option>
-                <option value="male">Мужчина</option>
-            </select>
-        </div>
 
-        <div class="field">
-            <label>Перечислите личные качества</label>
-            <textarea name="qualities"></textarea>
-        </div>
-    </fieldset>
+button_send = tk.Button(window, text="Отправить информацию", command=send_info)
+button_send.pack(pady=15)
 
-    <fieldset>
-        <legend>Выберите ваших любимых животных</legend>
-        <div class="checkboxes">
-            <label><input type="checkbox" name="animal" value="zebra"> Зебра</label>
-            <label><input type="checkbox" name="animal" value="cat"> Кошак</label>
-            <label><input type="checkbox" name="animal" value="anaconda"> Анаконда</label>
-            <label><input type="checkbox" name="animal" value="human"> Человек</label>
-            <label><input type="checkbox" name="animal" value="elephant"> Слон</label>
-            <label><input type="checkbox" name="animal" value="antelope"> Антилопа</label>
-            <label><input type="checkbox" name="animal" value="pigeon"> Голубь</label>
-            <label><input type="checkbox" name="animal" value="crab"> Краб</label>
-        </div>
-    </fieldset>
-
-    <button type="submit">Отправить информацию</button>
-
-</form>
-
-</body>
-</html>
-
+window.mainloop()

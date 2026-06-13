@@ -1,43 +1,109 @@
+# Приложение АБИТУРИЕНТ для автоматизации работы приемной комиссии.
+# Таблица Анкета: Регистрационный номер, Фамилия, Имя, Отчество,
+# Дата рождения, Награды (да/нет), Адрес, Специальность.
+
 import sqlite3
 
-conn = sqlite3.connect('abiturient.db')
+conn = sqlite3.connect("abiturient.db")
 cur = conn.cursor()
 
-cur.execute('''
-    CREATE TABLE IF NOT EXISTS anketa (
-        reg_num INTEGER PRIMARY KEY AUTOINCREMENT,
-        last_name TEXT,
-        first_name TEXT,
-        middle_name TEXT,
-        birth_date TEXT,
-        awards TEXT,
-        address TEXT,
-        specialty TEXT
-    )
-''')
+cur.execute("""
+CREATE TABLE IF NOT EXISTS Anketa (
+    reg_number INTEGER PRIMARY KEY,
+    surname TEXT,
+    name TEXT,
+    patronymic TEXT,
+    birth_date TEXT,
+    awards TEXT,
+    address TEXT,
+    speciality TEXT
+)
+""")
 conn.commit()
 
-data = [
-    ('Иванов', 'Иван', 'Иванович', '2005-03-12', 'нет', 'ул. Ленина 5', 'Программирование'),
-    ('Петрова', 'Анна', 'Сергеевна', '2006-07-24', 'да', 'ул. Мира 10', 'Экономика'),
-    ('Сидоров', 'Дмитрий', 'Алексеевич', '2005-11-01', 'нет', 'пр. Победы 3', 'Юриспруденция'),
-    ('Козлова', 'Мария', 'Владимировна', '2006-01-15', 'да', 'ул. Садовая 7', 'Медицина'),
-    ('Новиков', 'Артём', 'Игоревич', '2005-09-30', 'нет', 'ул. Гагарина 2', 'Программирование'),
-    ('Фёдорова', 'Екатерина', 'Павловна', '2006-04-18', 'нет', 'ул. Цветочная 11', 'Экономика'),
-    ('Морозов', 'Никита', 'Андреевич', '2005-06-05', 'да', 'пр. Советский 8', 'Архитектура'),
-    ('Волкова', 'Юлия', 'Олеговна', '2006-02-22', 'нет', 'ул. Пушкина 14', 'Программирование'),
-    ('Зайцев', 'Роман', 'Викторович', '2005-12-09', 'нет', 'ул. Молодёжная 6', 'Юриспруденция'),
-    ('Лебедева', 'Дарья', 'Николаевна', '2006-08-17', 'да', 'ул. Весенняя 1', 'Медицина'),
+
+def add_entry(reg_number, surname, name, patronymic, birth_date, awards, address, speciality):
+    try:
+        cur.execute("INSERT INTO Anketa VALUES (?, ?, ?, ?, ?, ?, ?, ?)",
+                     (reg_number, surname, name, patronymic, birth_date, awards, address, speciality))
+        conn.commit()
+    except sqlite3.IntegrityError:
+        print("Запись с регистрационным номером", reg_number, "уже существует")
+
+
+abiturients = [
+    (1, "Иванов", "Иван", "Иванович", "12.05.2006", "нет", "г. Ростов-на-Дону, ул. Ленина 1", "Информатика"),
+    (2, "Петрова", "Анна", "Сергеевна", "23.08.2006", "да", "г. Ростов-на-Дону, ул. Мира 5", "Информатика"),
+    (3, "Сидоров", "Олег", "Андреевич", "01.01.2005", "нет", "г. Таганрог, ул. Свободы 12", "Экономика"),
+    (4, "Кузнецова", "Мария", "Игоревна", "14.03.2006", "да", "г. Шахты, ул. Садовая 3", "Юриспруденция"),
+    (5, "Смирнов", "Дмитрий", "Олегович", "19.09.2005", "нет", "г. Новочеркасск, ул. Победы 7", "Информатика"),
+    (6, "Васильева", "Елена", "Петровна", "30.11.2006", "нет", "г. Ростов-на-Дону, ул. Текучева 21", "Экономика"),
+    (7, "Морозов", "Артем", "Викторович", "05.02.2005", "да", "г. Батайск, ул. Луначарского 9", "Юриспруденция"),
+    (8, "Новикова", "Ольга", "Андреевна", "27.06.2006", "нет", "г. Ростов-на-Дону, ул. Содружества 14", "Информатика"),
+    (9, "Федоров", "Сергей", "Николаевич", "08.04.2005", "нет", "г. Таганрог, ул. Чехова 18", "Экономика"),
+    (10, "Алексеева", "Виктория", "Романовна", "16.07.2006", "да", "г. Ростов-на-Дону, ул. Большая Садовая 33", "Юриспруденция"),
 ]
 
-cur.executemany('''
-    INSERT INTO anketa (last_name, first_name, middle_name, birth_date, awards, address, specialty)
-    VALUES (?, ?, ?, ?, ?, ?, ?)
-''', data)
+for ab in abiturients:
+    add_entry(*ab)
+
+
+print("Поиск по фамилии:")
+cur.execute("SELECT * FROM Anketa WHERE surname = ?", ("Иванов",))
+for row in cur.fetchall():
+    print(row)
+
+print()
+print("Поиск по специальности:")
+cur.execute("SELECT * FROM Anketa WHERE speciality = ?", ("Информатика",))
+for row in cur.fetchall():
+    print(row)
+
+print()
+print("Поиск абитуриентов с наградами:")
+cur.execute("SELECT * FROM Anketa WHERE awards = ?", ("да",))
+for row in cur.fetchall():
+    print(row)
+
+
+print()
+print("Редактирование адреса:")
+cur.execute("UPDATE Anketa SET address = ? WHERE reg_number = ?", ("г. Ростов-на-Дону, ул. Пушкинская 10", 1))
+conn.commit()
+cur.execute("SELECT * FROM Anketa WHERE reg_number = ?", (1,))
+print(cur.fetchone())
+
+print()
+print("Редактирование специальности:")
+cur.execute("UPDATE Anketa SET speciality = ? WHERE reg_number = ?", ("Программирование", 3))
+conn.commit()
+cur.execute("SELECT * FROM Anketa WHERE reg_number = ?", (3,))
+print(cur.fetchone())
+
+print()
+print("Редактирование наличия наград:")
+cur.execute("UPDATE Anketa SET awards = ? WHERE reg_number = ?", ("да", 5))
+conn.commit()
+cur.execute("SELECT * FROM Anketa WHERE reg_number = ?", (5,))
+print(cur.fetchone())
+
+
+print()
+print("Удаление по регистрационному номеру:")
+cur.execute("DELETE FROM Anketa WHERE reg_number = ?", (10,))
 conn.commit()
 
-print("Все записи:")
-cur.execute('SELECT * FROM anketa')
+print("Удаление по фамилии:")
+cur.execute("DELETE FROM Anketa WHERE surname = ?", ("Морозов",))
+conn.commit()
+
+print("Удаление по специальности:")
+cur.execute("DELETE FROM Anketa WHERE speciality = ?", ("Экономика",))
+conn.commit()
+
+print()
+print("Итоговая таблица после всех операций:")
+cur.execute("SELECT * FROM Anketa")
 for row in cur.fetchall():
     print(row)
 

@@ -1,3 +1,7 @@
+Из словаря my_dict = {'name': 'Alice', 'age': 35, 'city': 'New York', 'profession': 'Doctor'}
+удалить 'profession', вывести все пары ключ-значение и проверить наличие 'age'
+
+
 my_dict = {'name': 'Alice', 'age': 35, 'city': 'New York', 'profession': 'Doctor'}
 
 del my_dict['profession']

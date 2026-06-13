@@ -1,23 +1,29 @@
+# Создайте класс «Студент», который имеет атрибуты имя, фамилия и оценки.
+# Добавьте методы для вычисления среднего балла и определения,
+# является ли студент отличником.
+
 class Student:
-    def __init__(self, first_name, last_name, grades):
-        self.first_name = first_name
-        self.last_name = last_name
+    def __init__(self, name, surname, grades):
+        self.name = name
+        self.surname = surname
         self.grades = grades
 
-    def average(self):
+    def average_grade(self):
         return sum(self.grades) / len(self.grades)
 
     def is_excellent(self):
-        return all(g == 5 for g in self.grades)
+        return all(grade == 5 for grade in self.grades)
 
 
-s1 = Student("Иван", "Петров", [5, 4, 5, 5, 4])
-s2 = Student("Анна", "Смирнова", [5, 5, 5, 5, 5])
+student1 = Student("Иван", "Иванов", [5, 4, 5, 5, 5])
+student2 = Student("Анна", "Петрова", [5, 5, 5, 5, 5])
 
-print(f"{s1.last_name} {s1.first_name}")
-print(f"Средний балл: {s1.average()}")
-print(f"Отличник: {s1.is_excellent()}")
+print(student1.surname, student1.name)
+print("Средний балл:", student1.average_grade())
+print("Отличник:", student1.is_excellent())
 
-print(f"\n{s2.last_name} {s2.first_name}")
-print(f"Средний балл: {s2.average()}")
-print(f"Отличник: {s2.is_excellent()}")
+print()
+
+print(student2.surname, student2.name)
+print("Средний балл:", student2.average_grade())
+print("Отличник:", student2.is_excellent())
